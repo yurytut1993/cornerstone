@@ -18,11 +18,6 @@
     min-width: 100%;
     margin-bottom: (spacing("double") + spacing("single"));
     margin-top: -(spacing("single")); // 3
-    opacity: 0;
-
-    &.is-visible {
-        opacity: 1;
-    }
 
     @include breakpoint("medium") {
         margin-top: -(spacing("single") + spacing("base")); // 3
@@ -127,6 +122,7 @@
         align-items: flex-start;
         height: 56.25vw;
         max-height: 100vh;
+        transition: height .3s ease;
 
         @include breakpoint("small") {
             max-height: remCalc(400px);
@@ -163,6 +159,11 @@
                 max-height: remCalc(600px);
             }
         }
+    }
+
+    &.is-image-error {
+        background: white url("../img/hero-carousel-image-load-error.png") center center no-repeat;
+        background-size: contain;
     }
 }
 
@@ -225,6 +226,7 @@
 }
 
 .heroCarousel-play-pause-button {
+    display: none;
     position: absolute;
     left: 15px;
     bottom: spacing("third");

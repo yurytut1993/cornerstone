@@ -1,21 +1,19 @@
-export default ($dots, actualSlide, actualSlideCount, dotLabels) => {
+const SLIDE_NUMBER = '[SLIDE_NUMBER]';
+
+export default ($dots, activeSlideIdx, slidesQuantity, { carouselDotAriaLabel, carouselActiveDotAriaLabel }) => {
     if (!$dots) return;
 
-    if (actualSlideCount === 1) {
+    if (slidesQuantity < 2) {
         $dots.css('display', 'none');
         return;
     }
 
     $dots.css('display', 'block');
 
-    const { dotAriaLabel, activeDotAriaLabel } = dotLabels;
+    $dots.children().each((idx, dot) => {
+        const dotSlideStatusText = idx === activeSlideIdx ? `, ${carouselActiveDotAriaLabel}` : '';
+        const dotAriaLabel = `${carouselDotAriaLabel.replace(SLIDE_NUMBER, idx + 1)}${dotSlideStatusText}`;
 
-    $dots.children().each((index, dot) => {
-        const $dot = $(dot);
-        const dotSlideNumber = index + 1;
-        const dotAriaLabelComputed = index === actualSlide
-            ? `${dotAriaLabel} ${dotSlideNumber}, ${activeDotAriaLabel}`
-            : `${dotAriaLabel} ${dotSlideNumber}`;
-        $dot.find('button').attr('aria-label', dotAriaLabelComputed);
+        $(dot).find('.js-carousel-dot').attr('aria-label', dotAriaLabel);
     });
 };

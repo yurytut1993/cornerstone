@@ -10,8 +10,9 @@ export default (
         ? breakpointSettings[activeBreakpoint]['slidesToScroll']
         : defaultSlidesToScrollQuantity;
 
+    // FYI - one slide can contain several card items for product carousel
     return {
-        actualSlideCount: Math.ceil(slideCount / slidesToScrollQuantity),
-        actualSlide: Math.ceil(currentSlide / slidesToScrollQuantity),
+        activeSlideIdx: Math.ceil(currentSlide / slidesToScrollQuantity),
+        slidesQuantity: Math.ceil(slideCount / slidesToScrollQuantity),
     };
 };

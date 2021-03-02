@@ -1,14 +1,16 @@
+{{~inject 'carouselArrowAriaLabel' (lang 'carousel.arrow_aria_label')}}
+{{~inject 'carouselDotAriaLabel' (lang 'carousel.dot_aria_label')}}
+{{~inject 'carouselActiveDotAriaLabel' (lang 'carousel.active_dot_aria_label')}}
+{{~inject 'carouselContentAnnounceMessage' (lang 'carousel.content_announce_message')}}
+
 <section class="productCarousel"
     data-list-name="{{list}}"
     data-slick='{
-        "dots": true,
         "infinite": false,
         "mobileFirst": true,
         "slidesToShow": 2,
         "slidesToScroll": 2,
         "slide": ".js-product-slide",
-        "prevArrow": "{{#if customArrowClass}}.{{customArrowClass}}{{/if}}.js-product-prev-arrow",
-        "nextArrow": "{{#if customArrowClass}}.{{customArrowClass}}{{/if}}.js-product-next-arrow",
         "responsive": [
             {
                 "breakpoint": 800,
@@ -26,20 +28,13 @@
             }
         ]
     }'
-    data-dots-labels='{
-        "dotAriaLabel": "{{lang 'carousel.dotAriaLabel'}}",
-        "activeDotAriaLabel": "{{lang 'carousel.activeDotAriaLabel'}}"
-    }'>
-    {{#if products.length '>' 1}}
-    <button aria-label="{{lang 'carousel.arrowAriaLabel'}} {{products.length}}" class="{{#if customArrowClass}}{{customArrowClass}} {{/if}}js-product-prev-arrow slick-prev slick-arrow"></button>
-    {{/if}}
+>
     {{#each products}}
     <div class="productCarousel-slide js-product-slide">
         {{> components/products/card settings=../settings theme_settings=../theme_settings customer=../customer event="list" position=(add @index 1)}}
     </div>
     {{/each}}
     {{#if products.length '>' 1}}
-    <button aria-label="{{lang 'carousel.arrowAriaLabel'}} {{products.length}}" class="{{#if customArrowClass}}{{customArrowClass}} {{/if}}js-product-next-arrow slick-next slick-arrow"></button>
-    {{> components/carousel-content-announcement slides_length=products.length}}
+        {{> components/carousel-content-announcement slides_length=products.length}}
     {{/if}}
 </section>

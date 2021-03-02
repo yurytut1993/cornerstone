@@ -24,8 +24,8 @@ export default function (context) {
             const $carousel = modal.$content.find('[data-slick]');
 
             if ($carousel.length) {
-                $carousel.on('init afterChange', onCarouselChange);
-                $carousel.on('click', '.slick-arrow', $carousel, onCarouselClick);
+                $carousel.on('init afterChange', (e, carousel) => onCarouselChange(e, carousel, context));
+                $carousel.on('click', '.slick-arrow', $carousel, e => onCarouselClick(e, context));
 
                 $carousel.slick();
             }
