@@ -1,6 +1,6 @@
-export default ({ $slider }, isAnalyzedClass) => {
+export default ({ $slider }, isAnalyzedDataAttr) => {
     const $activeSlide = $slider.find('.slick-current .heroCarousel-slide');
-    const isAnalyzedSlide = $activeSlide.hasClass(isAnalyzedClass);
+    const isAnalyzedSlide = $activeSlide.data(isAnalyzedDataAttr);
 
     if (isAnalyzedSlide) return { isAnalyzedSlide };
 

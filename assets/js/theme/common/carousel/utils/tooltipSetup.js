@@ -1,9 +1,9 @@
+const TOOLTIP_DATA_SELECTOR = 'data-carousel-tooltip';
 const TOOLTIP_CLASS = 'carousel-tooltip';
-const TOOLTIP_NODE = `<span class="${TOOLTIP_CLASS}"></span>`;
+const TOOLTIP_NODE = `<span ${TOOLTIP_DATA_SELECTOR} class="${TOOLTIP_CLASS}"></span>`;
 
 const setupTooltipAriaLabel = ($node) => {
-    const $existedTooltip = $node.find(`.${TOOLTIP_CLASS}`);
-
+    const $existedTooltip = $node.find(`[${TOOLTIP_DATA_SELECTOR}]`);
     if ($existedTooltip.length) {
         $existedTooltip.attr('aria-label', $node.attr('aria-label'));
     } else {
@@ -17,7 +17,7 @@ const setupArrowTooltips = (...arrowNodes) => {
 };
 
 const setupDotTooltips = ($dots) => {
-    $dots.children().each((idx, dot) => setupTooltipAriaLabel($('.js-carousel-dot', dot)));
+    $dots.children().each((idx, dot) => setupTooltipAriaLabel($('[data-carousel-dot]', dot)));
 };
 
 export default ($prevArrow, $nextArrow, $dots) => {

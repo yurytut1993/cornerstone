@@ -33,7 +33,7 @@ export const onCarouselClick = ({
 }, context) => {
     const $parentContainer = $activeSlider.hasClass('productView-thumbnails') ? $('.productView-images') : $activeSlider;
     const { activeSlideIdx, slidesQuantity } = extractSlidesDetails($activeSlider[0].slick);
-    const $carouselContentElement = $('.js-carousel-content-change-message', $parentContainer);
+    const $carouselContentElement = $('[data-carousel-content-change-message]', $parentContainer);
     const carouselContentAnnounceMessage = updateTextWithLiveData(context.carouselContentAnnounceMessage, (activeSlideIdx + 1), slidesQuantity);
 
     $carouselContentElement.text(carouselContentAnnounceMessage);
@@ -51,8 +51,8 @@ export const onCarouselChange = (e, carousel, context) => {
     const { activeSlideIdx, slidesQuantity } = extractSlidesDetails(carousel);
 
     dotsSetup($dots, activeSlideIdx, slidesQuantity, context);
+    arrowAriaLabling($prevArrow, $nextArrow, activeSlideIdx, slidesQuantity, context.carouselArrowAndDotAriaLabel);
     setTabindexes($slider.find('.slick-slide'), $prevArrow, $nextArrow, activeSlideIdx, slidesQuantity, infinite);
-    arrowAriaLabling($prevArrow, $nextArrow, activeSlideIdx, slidesQuantity, context);
     tooltipSetup($prevArrow, $nextArrow, $dots);
     activatePlayPauseButton(carousel, slidesQuantity, context);
 };
@@ -73,7 +73,7 @@ export default function (context) {
         const isMultipleSlides = $carousel.children().length > 1;
         const customPaging = isMultipleSlides
             ? () => (
-                '<button class="js-carousel-dot" type="button"></button>'
+                '<button data-carousel-dot type="button"></button>'
             )
             : () => {};
 

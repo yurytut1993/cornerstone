@@ -1,8 +1,3 @@
-{{~inject 'carouselArrowAriaLabel' (lang 'carousel.arrow_aria_label')}}
-{{~inject 'carouselDotAriaLabel' (lang 'carousel.dot_aria_label')}}
-{{~inject 'carouselActiveDotAriaLabel' (lang 'carousel.active_dot_aria_label')}}
-{{~inject 'carouselContentAnnounceMessage' (lang 'carousel.content_announce_message')}}
-
 <section class="productCarousel"
     data-list-name="{{list}}"
     data-slick='{
@@ -10,7 +5,7 @@
         "mobileFirst": true,
         "slidesToShow": 2,
         "slidesToScroll": 2,
-        "slide": ".js-product-slide",
+        "slide": "[data-product-slide]",
         "responsive": [
             {
                 "breakpoint": 800,
@@ -30,7 +25,7 @@
     }'
 >
     {{#each products}}
-    <div class="productCarousel-slide js-product-slide">
+    <div data-product-slide class="productCarousel-slide">
         {{> components/products/card settings=../settings theme_settings=../theme_settings customer=../customer event="list" position=(add @index 1)}}
     </div>
     {{/each}}

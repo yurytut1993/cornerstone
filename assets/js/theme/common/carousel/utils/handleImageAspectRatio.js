@@ -3,8 +3,8 @@ import getActiveSlideInfo from './getActiveSlideInfo';
 const IMAGE_CLASSES = {
     vertical: 'is-vertical-image-type',
     square: 'is-square-image-type',
-    analyzed: 'js-image-ratio-analyzed',
 };
+const IS_ANALYZED_DATA_ATTR = 'image-ratio-analyzed';
 
 const defineClass = (imageAspectRatio) => {
     switch (true) {
@@ -23,11 +23,11 @@ export default ({ delegateTarget }, carousel) => {
         attrsObj,
         $activeSlide,
         $slidesWithSameImgSrc,
-    } = getActiveSlideInfo(carousel || delegateTarget.slick, IMAGE_CLASSES.analyzed);
+    } = getActiveSlideInfo(carousel || delegateTarget.slick, IS_ANALYZED_DATA_ATTR);
 
     if (isAnalyzedSlide) return;
 
-    $slidesWithSameImgSrc.each((idx, slide) => $(slide).addClass(IMAGE_CLASSES.analyzed));
+    $slidesWithSameImgSrc.each((idx, slide) => $(slide).data(IS_ANALYZED_DATA_ATTR, true));
 
     if ($activeSlide.find('.heroCarousel-content').length) return;
 

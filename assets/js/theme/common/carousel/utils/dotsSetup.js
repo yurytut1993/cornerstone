@@ -1,6 +1,6 @@
-const SLIDE_NUMBER = '[SLIDE_NUMBER]';
+import updateTextWithLiveData from './updateTextWithLiveData';
 
-export default ($dots, activeSlideIdx, slidesQuantity, { carouselDotAriaLabel, carouselActiveDotAriaLabel }) => {
+export default ($dots, activeSlideIdx, slidesQuantity, { carouselArrowAndDotAriaLabel, carouselActiveDotAriaLabel }) => {
     if (!$dots) return;
 
     if (slidesQuantity < 2) {
@@ -11,9 +11,10 @@ export default ($dots, activeSlideIdx, slidesQuantity, { carouselDotAriaLabel, c
     $dots.css('display', 'block');
 
     $dots.children().each((idx, dot) => {
+        const dotLabelText = updateTextWithLiveData(carouselArrowAndDotAriaLabel, idx + 1, slidesQuantity);
         const dotSlideStatusText = idx === activeSlideIdx ? `, ${carouselActiveDotAriaLabel}` : '';
-        const dotAriaLabel = `${carouselDotAriaLabel.replace(SLIDE_NUMBER, idx + 1)}${dotSlideStatusText}`;
+        const dotAriaLabel = `${dotLabelText}${dotSlideStatusText}`;
 
-        $(dot).find('.js-carousel-dot').attr('aria-label', dotAriaLabel);
+        $(dot).find('[data-carousel-dot]').attr('aria-label', dotAriaLabel);
     });
 };

@@ -1,8 +1,3 @@
-{{~inject 'carouselArrowAriaLabel' (lang 'carousel.arrow_aria_label')}}
-{{~inject 'carouselDotAriaLabel' (lang 'carousel.dot_aria_label')}}
-{{~inject 'carouselActiveDotAriaLabel' (lang 'carousel.active_dot_aria_label')}}
-{{~inject 'carouselContentAnnounceMessage' (lang 'carousel.content_announce_message')}}
-
 <section class="heroCarousel"
     data-slick='{
         "arrows": {{arrows}},
@@ -11,14 +6,14 @@
         "slidesToScroll": 1,
         "autoplay": true,
         "autoplaySpeed": {{carousel.swap_frequency}},
-        "slide": ".js-hero-slide"
+        "slide": "[data-hero-slide]"
     }'
 >
     {{#each carousel.slides}}
     {{#if button_text}}
-    <div class="js-hero-slide">
+    <div data-hero-slide>
     {{else}}
-    <a href="{{url}}" class="js-hero-slide" aria-label="{{#if this.alt_text.length '!=' 0}}{{this.alt_text}}{{else}}{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{/if}}">
+    <a href="{{url}}" data-hero-slide aria-label="{{#if this.alt_text.length '!=' 0}}{{this.alt_text}}{{else}}{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{/if}}">
     {{/if}}
         <div class="heroCarousel-slide {{#if ../theme_settings.homepage_stretch_carousel_images}}stretch{{/if}} {{#if @first}}heroCarousel-slide--first{{/if}}">
             <div class="heroCarousel-image-wrapper">
