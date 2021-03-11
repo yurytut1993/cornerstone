@@ -19,13 +19,11 @@ import {
  * @returns {Object}
  */
 const extractSlidesDetails = ({
-    slideCount, currentSlide, breakpointSettings, activeBreakpoint, $slider,
+    slideCount, currentSlide, options: { slidesToScroll },
 }) => getActiveSlideIdxAndSlidesQuantity(
-    breakpointSettings,
-    activeBreakpoint,
     currentSlide,
     slideCount,
-    $slider.data('slick').slidesToScroll,
+    slidesToScroll,
 );
 
 export const onCarouselClick = ({

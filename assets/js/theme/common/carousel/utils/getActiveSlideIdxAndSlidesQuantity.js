@@ -1,18 +1,7 @@
-export default (
-    breakpointSettings,
-    activeBreakpoint,
-    currentSlide,
-    slideCount,
-    defaultSlidesToScrollQuantity = 1,
-) => {
-    const slidesToScrollQuantity = activeBreakpoint
-        /* eslint-disable dot-notation */
-        ? breakpointSettings[activeBreakpoint]['slidesToScroll']
-        : defaultSlidesToScrollQuantity;
-
+export default (currentSlide, slideCount, slidesToScroll) => (
     // FYI - one slide can contain several card items for product carousel
-    return {
-        activeSlideIdx: Math.ceil(currentSlide / slidesToScrollQuantity),
-        slidesQuantity: Math.ceil(slideCount / slidesToScrollQuantity),
-    };
-};
+    {
+        activeSlideIdx: Math.ceil(currentSlide / slidesToScroll),
+        slidesQuantity: Math.ceil(slideCount / slidesToScroll),
+    }
+);
